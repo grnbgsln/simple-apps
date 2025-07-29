@@ -33,9 +33,9 @@ app.get('/users', (req, res, next) => {
   })
 });
 
+
 app.get('/users/:id', (req, res, next) => {
   const id = req.params.id
-  console.log(id)
   const sql = "SELECT * FROM tb_data where id = " + id + " ORDER BY id desc"
   connection.query(sql, (error, fields) => {
     if (error) {
@@ -48,9 +48,7 @@ app.get('/users/:id', (req, res, next) => {
 
 app.post('/users', (req, res) => {
   const { name, email, no_telp } = req.body;
-
   const findLatestId = "SELECT id FROM tb_data ORDER BY id DESC LIMIT 1";
-
   connection.query(findLatestId, (error, results) => {
     if (error) {
       return res.status(500).send(error);
